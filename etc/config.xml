@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+
+            <!-- Cielo Webservice - Default Values-->
+            <cielo_webservice>
+                <model>Gabrielqs\Cielo\Model\Webservice</model>
+                <payment_action>authorize</payment_action>
+                <active>0</active>
+                <title>Cartão de Crédito</title>
+                <sort_order>10</sort_order>
+                <cctypes>VI,MC,AE,DN,EL,JC,AU,DI</cctypes>
+                <min_order_total>0</min_order_total>
+                <maximum_installment_quantity>12</maximum_installment_quantity>
+                <minimum_installment_value>5</minimum_installment_value>
+                <interest_rate>1.99</interest_rate>
+
+                <!-- Test Credentials -->
+                <test_company_id>1006993069</test_company_id>
+                <test_access_key>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</test_access_key>
+
+                <!-- API Urls -->
+                <test_api_url></test_api_url>
+                <api_url></api_url>
+            </cielo_webservice>
+
+        </payment>
+
+        <!-- Will be used by the installments module to compute installments -->
+        <installments>
+            <payment_methods>
+                <cielo_webservice>
+                    <installments_helper>Gabrielqs\Cielo\Helper\Webservice\Installments</installments_helper>
+                </cielo_webservice>
+            </payment_methods>
+        </installments>
+    </default>
+</config>

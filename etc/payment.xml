@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Payment/etc/payment.xsd">
+    <methods>
+        <method name="cielo_webservice">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+    </methods>
+    <credit_cards>
+        <type id="EL" order="110">
+            <label>Elo</label>
+        </type>
+        <type id="AU" order="110">
+            <label>Aura</label>
+        </type>
+    </credit_cards>
+</payment>

@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+
+            <!-- Cielo -->
+            <group id="cielo_webservice" translate="label" type="text" sortOrder="710" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cielo WebService</label>
+
+
+                <!-- Enabled? -->
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+
+                <!-- Visual -->
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+
+
+                <!-- Company credentials -->
+                <field id="company_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Company ID Number</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="access_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Access Key</label>
+                    <comment>When on test mode, the company id and access key fields are ignored and test credentials are used instead</comment>
+
+                </field>
+
+
+                <!-- Integration Modes: Test, Homologation, Auto-invoice, Auto-cancel, AVS -->
+                <field id="test_mode_enabled" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test Mode Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="homologation_mode_enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Homologation Mode Enabled</label>
+                    <comment>Create a product with the following SKU: cielo_test, when on homologation mode the payment method will only be available when this product is added to the shopping cart</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="avs_mode_enabled" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AVS mode enabled</label>
+                    <comment>Will use Address Verification System results when authorising, check with Cielo if this is available for your account</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+
+                <!-- Payment and Interest Settings -->
+                <field id="cctypes" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credit Card Types</label>
+                    <source_model>Gabrielqs\Cielo\Model\Source\Cctype</source_model>
+                </field>
+                <field id="maximum_installment_quantity" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Installment Quantity</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="minimum_installment_value" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Installment Value</label>
+                    <frontend_class>validate-decimal</frontend_class>
+                </field>
+                <field id="interest_rate" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Monthly Interest Rate</label>
+                    <frontend_class>validate-decimal</frontend_class>
+                    <comment>Must be a percentage value using point as a decimal separator. Example: 1.99% should be set as 1.99</comment>
+                </field>
+                <field id="minimum_order_value_no_interest" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Order Value With No Interest</label>
+                    <frontend_model>Gabrielqs\Cielo\Block\System\Config\Form\Field\InstallmentsWithNoInterest</frontend_model>
+                    <backend_model>Gabrielqs\Cielo\Model\System\Config\InstallmentsWithNoInterest</backend_model>
+                    <comment>Use point as a decimal separator, and don't include currency symbols for amounts</comment>
+                </field>
+                <field id="min_order_total" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Order Total</label>
+                    <comment>Orders with smaller totals won't be placed with this payment method</comment>
+
+                </field>
+                <field id="max_order_total" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Order Total</label>
+                    <comment>Leave empty to disable limit</comment>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
