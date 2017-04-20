@@ -2,7 +2,7 @@
   "name": "gabrielqs/cielo-webservice",
   "description": "Integração transparente entre o Magento 2 e a Cielo utilizando o método de integração WebService",
   "type": "magento2-module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": [
     "MIT"
   ],
