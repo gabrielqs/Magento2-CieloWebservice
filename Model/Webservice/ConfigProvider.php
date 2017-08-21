@@ -70,22 +70,28 @@ class ConfigProvider extends CcGenericConfigProvider
      */
     public function getConfig()
     {
-        $config = parent::getConfig();
+        $method = $this->_webserviceHelper->getMethodCode();
 
-        if ($this->_webserviceHelper->getConfigData('active')) {
-            $config['payment'][$this->_webserviceHelper->getMethodCode()] = [
-                'active'               => true,
-                'icons'                => $this->_getIcons(),
-                'installments'         => $this->_installmentsHelper->getInstallments($this->_getPaymentAmount()),
-                'interestRates'        => $this->_installmentsHelper->getInstallmentConfig()
-            ];
-        } else {
-            $config['payment'][$this->_webserviceHelper->getMethodCode()] = [
-                'active'                                  => false,
+        if (!$this->_webserviceHelper->getConfigData('active')) {
+            return [
+                'payment' => [
+                    $method => [
+                        'active' => false,
+                    ]
+                ]
             ];
         }
 
-        return $config;
+        return [
+            'payment' => [
+                $method => [
+                    'active'        => true,
+                    'icons'         => $this->_getIcons(),
+                    'installments'  => $this->_installmentsHelper->getInstallments($this->_getPaymentAmount()),
+                    'interestRates' => $this->_installmentsHelper->getInstallmentConfig()
+                ]
+            ]
+        ];
     }
 
     /**
